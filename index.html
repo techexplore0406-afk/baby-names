@@ -5,312 +5,281 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#FAF7F2" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="description" content="Help us choose the perfect baby name — submit your favourite names anonymously and vote for the ones you love." />
-  <meta property="og:title" content="little names ✦ Help Us Choose!" />
+  <meta property="og:title" content="little names ✦ A little hunny is on the way!" />
   <meta property="og:description" content="Submit your favourite baby names and vote for the ones you love. Completely anonymous." />
   <title>little names ✦</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
-
   <style>
     :root {
-      --cream:       #FAF7F2;
-      --warm-white:  #FFFEF9;
-      --beige:       #EDE5D8;
-      --beige-dark:  #C9BBAA;
-      --sage:        #7A9E7E;
-      --sage-light:  #B8D4BB;
-      --sage-bg:     #EBF2EC;
-      --sage-dark:   #4A6B4E;
-      --muted-blue:  #7B9DB5;
-      --blue-light:  #D0E3EF;
-      --blue-soft:   #E3EDF5;
-      --pink-soft:   #F0E4E8;
-      --pink-accent: #C49BAA;
-      --gold:        #C4A45A;
-      --gold-light:  #F5EDD4;
-      --text-dark:   #2C2420;
-      --text-mid:    #5C5248;
-      --text-soft:   #9C9088;
-      --radius:      18px;
-      --radius-sm:   11px;
-      --shadow:      0 4px 28px rgba(44,36,32,0.09);
-      --shadow-lg:   0 16px 56px rgba(44,36,32,0.14);
-      --nav-h:       60px;
+      --cream:#FAF7F2; --warm-white:#FFFEF9; --beige:#EDE5D8; --beige-dark:#C9BBAA;
+      --sage:#7A9E7E; --sage-light:#B8D4BB; --sage-bg:#EBF2EC; --sage-dark:#4A6B4E;
+      --muted-blue:#7B9DB5; --blue-light:#D0E3EF; --blue-soft:#E3EDF5;
+      --pink-soft:#F0E4E8; --pink-accent:#C49BAA;
+      --gold:#C4A45A; --gold-light:#F5EDD4;
+      --text-dark:#2C2420; --text-mid:#5C5248; --text-soft:#9C9088;
+      --radius:18px; --radius-sm:11px;
+      --shadow:0 4px 28px rgba(44,36,32,0.09);
+      --shadow-lg:0 16px 56px rgba(44,36,32,0.14);
+      --nav-h:60px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
+    }
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--cream); color: var(--text-dark);
-      min-height: 100vh; font-size: 15px; line-height: 1.65; overflow-x: hidden;
+      min-height: 100vh; font-size: 15px; line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
     }
-    button { cursor: pointer; font-family: inherit; }
-    input, textarea, select { font-family: inherit; }
+    button { cursor: pointer; font-family: inherit; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    input, textarea, select { font-family: inherit; -webkit-appearance: none; border-radius: 0; }
 
-    /* ── FIREBASE CONFIG BANNER ── */
-    #config-banner {
-      background: #FFF3CD; border-bottom: 2px solid #F0AD00;
-      padding: 14px 20px; text-align: center; font-size: 14px; color: #7A5800;
-      display: none;
-    }
-    #config-banner strong { font-weight: 600; }
-    #config-banner code {
-      background: rgba(0,0,0,0.08); padding: 2px 7px;
-      border-radius: 4px; font-size: 13px;
-    }
-
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(255,254,249,0.93);
+      background: rgba(255,254,249,0.95);
       backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--beige);
-      height: var(--nav-h); display: flex; align-items: center; padding: 0 20px;
+      height: var(--nav-h); display: flex; align-items: center; padding: 0 16px;
     }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 19px; font-style: italic;
-      color: var(--sage-dark); letter-spacing: -0.3px; flex-shrink: 0;
-    }
-    .nav-logo span { color: var(--gold); }
-    .nav-links { display: flex; gap: 6px; align-items: center; margin-left: auto; }
-    .nav-btn {
-      background: none; border: 1px solid transparent;
-      border-radius: 24px; padding: 7px 14px;
-      font-size: 13px; font-weight: 500; color: var(--text-mid); transition: all 0.2s;
-    }
-    .nav-btn:hover { background: var(--sage-bg); color: var(--sage-dark); }
-    .nav-btn.active { background: var(--sage-dark); color: #fff; }
-    .hamburger {
-      display: none; margin-left: auto; background: none; border: none;
-      flex-direction: column; gap: 5px; padding: 6px; border-radius: 8px;
-    }
-    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text-mid); border-radius: 2px; transition: all 0.25s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-logo { font-family:'Playfair Display',serif; font-size:19px; font-style:italic; color:var(--sage-dark); letter-spacing:-0.3px; flex-shrink:0; }
+    .nav-logo span { color:var(--gold); }
+    .nav-links { display:flex; gap:4px; align-items:center; margin-left:auto; }
+    .nav-btn { background:none; border:1px solid transparent; border-radius:24px; padding:7px 12px; font-size:12px; font-weight:500; color:var(--text-mid); transition:all 0.2s; white-space:nowrap; }
+    .nav-btn:hover { background:var(--sage-bg); color:var(--sage-dark); }
+    .nav-btn.active { background:var(--sage-dark); color:#fff; }
+    .hamburger { display:none; margin-left:auto; background:none; border:none; flex-direction:column; gap:5px; padding:8px; border-radius:8px; }
+    .hamburger span { display:block; width:22px; height:2px; background:var(--text-mid); border-radius:2px; transition:all 0.25s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
     .mobile-menu {
-      display: none; position: fixed;
-      top: var(--nav-h); left: 0; right: 0;
-      background: var(--warm-white); border-bottom: 1px solid var(--beige);
-      padding: 12px 16px 16px; z-index: 199; flex-direction: column; gap: 4px;
+      display:none; position:fixed;
+      top:var(--nav-h); left:0; right:0;
+      background:var(--warm-white); border-bottom:1px solid var(--beige);
+      padding:8px 12px 16px; z-index:199; flex-direction:column; gap:2px;
+      box-shadow: 0 8px 24px rgba(44,36,32,0.1);
     }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu .nav-btn { text-align: left; border-radius: var(--radius-sm); padding: 12px 16px; font-size: 15px; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu .nav-btn { text-align:left; border-radius:var(--radius-sm); padding:14px 16px; font-size:15px; border:none; }
+    .mobile-menu .nav-btn:active { background:var(--sage-bg); }
 
-    /* ── PAGES ── */
-    .page { display: none; padding-top: var(--nav-h); }
-    .page.active { display: block; }
+    /* PAGES */
+    .page { display:none; padding-top:var(--nav-h); min-height:100vh; }
+    .page.active { display:block; }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       background: linear-gradient(150deg, var(--warm-white) 0%, var(--sage-bg) 55%, var(--blue-soft) 100%);
-      padding: 64px 20px 72px; text-align: center; position: relative; overflow: hidden;
+      padding: 52px 20px 60px; text-align:center; position:relative; overflow:hidden;
     }
-    .hero-orb1 { position: absolute; top: -80px; right: -80px; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, var(--gold-light) 0%, transparent 70%); pointer-events: none; }
-    .hero-orb2 { position: absolute; bottom: -60px; left: -60px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, var(--pink-soft) 0%, transparent 70%); pointer-events: none; }
+    .hero-orb1 { position:absolute; top:-60px; right:-60px; width:240px; height:240px; border-radius:50%; background:radial-gradient(circle, var(--gold-light) 0%, transparent 70%); pointer-events:none; opacity:0.8; }
+    .hero-orb2 { position:absolute; bottom:-40px; left:-40px; width:180px; height:180px; border-radius:50%; background:radial-gradient(circle, var(--pink-soft) 0%, transparent 70%); pointer-events:none; }
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--gold-light); border: 1px solid var(--gold);
-      border-radius: 24px; padding: 6px 18px; font-size: 11px; font-weight: 500;
-      color: #8B6914; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 24px;
+      display:inline-flex; align-items:center; gap:6px;
+      background:var(--gold-light); border:1px solid var(--gold);
+      border-radius:24px; padding:7px 18px; font-size:11px; font-weight:500;
+      color:#8B6914; letter-spacing:1px; text-transform:uppercase; margin-bottom:20px;
     }
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(30px, 6vw, 54px); font-weight: 500; line-height: 1.18;
-      color: var(--text-dark); letter-spacing: -0.5px; margin-bottom: 18px;
+      font-family:'Playfair Display',serif;
+      font-size:clamp(28px,8vw,52px); font-weight:500; line-height:1.2;
+      color:var(--text-dark); letter-spacing:-0.5px; margin-bottom:16px;
     }
-    .hero h1 em { font-style: italic; color: var(--sage-dark); }
-    .hero-sub { font-size: clamp(15px, 2.5vw, 17px); color: var(--text-mid); font-weight: 300; max-width: 460px; margin: 0 auto 36px; line-height: 1.7; }
-    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary { background: var(--sage-dark); color: #fff; border: none; border-radius: 32px; padding: 14px 32px; font-size: 15px; font-weight: 500; transition: all 0.25s; }
-    .btn-primary:hover { background: #3A5A3E; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(74,107,78,0.32); }
-    .btn-primary:active { transform: translateY(0); }
-    .btn-secondary { background: #fff; color: var(--text-mid); border: 1px solid var(--beige-dark); border-radius: 32px; padding: 14px 28px; font-size: 15px; font-weight: 500; transition: all 0.25s; }
-    .btn-secondary:hover { border-color: var(--sage-light); background: var(--sage-bg); color: var(--sage-dark); transform: translateY(-2px); }
+    .hero h1 em { font-style:italic; color:var(--sage-dark); }
+    .hero-sub { font-size:15px; color:var(--text-mid); font-weight:300; max-width:440px; margin:0 auto 32px; line-height:1.7; }
+    .hero-btns { display:flex; gap:10px; justify-content:center; flex-direction:column; align-items:center; }
+    .btn-primary { background:var(--sage-dark); color:#fff; border:none; border-radius:32px; padding:15px 36px; font-size:15px; font-weight:500; transition:all 0.2s; width:100%; max-width:280px; }
+    .btn-primary:active { background:#3A5A3E; transform:scale(0.98); }
+    .btn-secondary { background:#fff; color:var(--text-mid); border:1px solid var(--beige-dark); border-radius:32px; padding:14px 32px; font-size:15px; font-weight:500; transition:all 0.2s; width:100%; max-width:280px; }
+    .btn-secondary:active { background:var(--sage-bg); transform:scale(0.98); }
 
-    /* ── STATS BAR ── */
-    .stats-bar { display: flex; background: #fff; border-bottom: 1px solid var(--beige); overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-    .stats-bar::-webkit-scrollbar { display: none; }
-    .stat-item { flex: 1; min-width: 90px; text-align: center; padding: 20px 12px; border-right: 1px solid var(--beige); }
-    .stat-item:last-child { border-right: none; }
-    .stat-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; color: var(--sage-dark); display: block; }
-    .stat-label { font-size: 11px; color: var(--text-soft); letter-spacing: 0.3px; }
+    /* STATS BAR */
+    .stats-bar { display:flex; background:#fff; border-bottom:1px solid var(--beige); overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+    .stats-bar::-webkit-scrollbar { display:none; }
+    .stat-item { flex:1; min-width:80px; text-align:center; padding:18px 10px; border-right:1px solid var(--beige); }
+    .stat-item:last-child { border-right:none; }
+    .stat-num { font-family:'Playfair Display',serif; font-size:24px; font-weight:500; color:var(--sage-dark); display:block; }
+    .stat-label { font-size:10px; color:var(--text-soft); letter-spacing:0.3px; margin-top:2px; }
 
-    /* ── SECTIONS ── */
-    .section { padding: 52px 20px; }
-    .section-white { background: #fff; }
-    .section-cta { background: linear-gradient(135deg, var(--sage-bg), var(--blue-soft)); }
-    .section-inner { max-width: 900px; margin: 0 auto; }
-    .section-hd { text-align: center; margin-bottom: 36px; }
-    .section-tag { font-size: 10px; font-weight: 500; letter-spacing: 1.8px; text-transform: uppercase; color: var(--sage); margin-bottom: 10px; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3.5vw, 34px); font-weight: 500; color: var(--text-dark); line-height: 1.25; }
-    .section-title em { font-style: italic; color: var(--sage-dark); }
-    .section-sub { color: var(--text-soft); font-size: 14px; margin-top: 8px; font-weight: 300; }
+    /* SECTIONS */
+    .section { padding:44px 16px; }
+    .section-white { background:#fff; }
+    .section-cta { background:linear-gradient(135deg,var(--sage-bg),var(--blue-soft)); }
+    .section-inner { max-width:900px; margin:0 auto; }
+    .section-hd { text-align:center; margin-bottom:28px; }
+    .section-tag { font-size:10px; font-weight:500; letter-spacing:1.8px; text-transform:uppercase; color:var(--sage); margin-bottom:8px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:clamp(22px,5vw,34px); font-weight:500; color:var(--text-dark); line-height:1.25; }
+    .section-title em { font-style:italic; color:var(--sage-dark); }
+    .section-sub { color:var(--text-soft); font-size:14px; margin-top:8px; font-weight:300; }
 
-    /* ── NAME CARDS ── */
-    .names-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
-    .name-card { background: #fff; border-radius: var(--radius); padding: 22px 20px 18px; border: 1px solid var(--beige); transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s; position: relative; overflow: hidden; }
-    .name-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--beige-dark); }
-    .name-card-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 2px 2px 0 0; }
-    .name-card.boy    .name-card-bar { background: linear-gradient(90deg, var(--blue-light), var(--muted-blue)); }
-    .name-card.girl   .name-card-bar { background: linear-gradient(90deg, var(--pink-soft), var(--pink-accent)); }
-    .name-card.neutral .name-card-bar { background: linear-gradient(90deg, var(--sage-bg), var(--sage)); }
-    .name-text { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 500; color: var(--text-dark); letter-spacing: -0.2px; margin-bottom: 4px; }
-    .gender-badge { display: inline-block; font-size: 10px; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; padding: 3px 10px; border-radius: 12px; margin-bottom: 14px; }
-    .gender-badge.boy     { background: var(--blue-soft); color: var(--muted-blue); }
-    .gender-badge.girl    { background: var(--pink-soft); color: var(--pink-accent); }
-    .gender-badge.neutral { background: var(--sage-bg);  color: var(--sage-dark); }
-    .name-stats { display: flex; gap: 14px; margin-bottom: 14px; font-size: 12px; color: var(--text-soft); }
-    .name-stats strong { color: var(--text-mid); font-weight: 500; }
-    .vote-btn { width: 100%; background: var(--cream); border: 1.5px solid var(--beige); border-radius: 10px; padding: 9px; font-size: 13px; font-weight: 500; color: var(--text-mid); display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
-    .vote-btn:hover  { background: var(--gold-light); border-color: var(--gold); color: #8B6914; }
-    .vote-btn.voted  { background: var(--gold-light); border-color: var(--gold); color: #8B6914; }
-    .vote-btn svg    { width: 15px; height: 15px; transition: transform 0.2s; flex-shrink: 0; }
-    .vote-btn:hover svg { transform: scale(1.2); }
-    .top-badge { position: absolute; top: 12px; right: 12px; background: var(--gold-light); border: 1px solid var(--gold); border-radius: 12px; padding: 3px 10px; font-size: 10px; font-weight: 500; color: #8B6914; letter-spacing: 0.5px; }
-    .empty-state { text-align: center; padding: 56px 20px; color: var(--text-soft); grid-column: 1/-1; }
-    .empty-state .icon { font-size: 44px; margin-bottom: 14px; }
-    .empty-state p { font-size: 14px; }
+    /* NAME CARDS */
+    .names-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+    .name-card { background:#fff; border-radius:var(--radius); padding:18px 16px 14px; border:1px solid var(--beige); position:relative; overflow:hidden; transition:transform 0.2s, box-shadow 0.2s; }
+    .name-card:active { transform:scale(0.98); }
+    .name-card-bar { position:absolute; top:0; left:0; right:0; height:3px; border-radius:2px 2px 0 0; }
+    .name-card.boy .name-card-bar    { background:linear-gradient(90deg,var(--blue-light),var(--muted-blue)); }
+    .name-card.girl .name-card-bar   { background:linear-gradient(90deg,var(--pink-soft),var(--pink-accent)); }
+    .name-card.neutral .name-card-bar{ background:linear-gradient(90deg,var(--sage-bg),var(--sage)); }
+    .name-text { font-family:'Playfair Display',serif; font-size:19px; font-weight:500; color:var(--text-dark); letter-spacing:-0.2px; margin-bottom:4px; }
+    .gender-badge { display:inline-block; font-size:9px; font-weight:500; letter-spacing:0.8px; text-transform:uppercase; padding:3px 8px; border-radius:12px; margin-bottom:10px; }
+    .gender-badge.boy     { background:var(--blue-soft); color:var(--muted-blue); }
+    .gender-badge.girl    { background:var(--pink-soft); color:var(--pink-accent); }
+    .gender-badge.neutral { background:var(--sage-bg);   color:var(--sage-dark); }
+    .name-stats { display:flex; gap:10px; margin-bottom:10px; font-size:11px; color:var(--text-soft); flex-wrap:wrap; }
+    .name-stats strong { color:var(--text-mid); font-weight:500; }
+    .vote-btn { width:100%; background:var(--cream); border:1.5px solid var(--beige); border-radius:10px; padding:10px 8px; font-size:12px; font-weight:500; color:var(--text-mid); display:flex; align-items:center; justify-content:center; gap:5px; transition:all 0.2s; touch-action:manipulation; }
+    .vote-btn:active { transform:scale(0.97); }
+    .vote-btn.voted { background:var(--gold-light); border-color:var(--gold); color:#8B6914; }
+    .vote-btn svg { width:14px; height:14px; flex-shrink:0; }
+    .top-badge { position:absolute; top:10px; right:10px; background:var(--gold-light); border:1px solid var(--gold); border-radius:12px; padding:2px 8px; font-size:9px; font-weight:500; color:#8B6914; }
+    .empty-state { text-align:center; padding:48px 20px; color:var(--text-soft); grid-column:1/-1; }
+    .empty-state .icon { font-size:40px; margin-bottom:12px; }
+    .empty-state p { font-size:14px; }
 
-    /* ── SKELETON LOADING ── */
-    .skeleton { background: linear-gradient(90deg, var(--beige) 25%, var(--cream) 50%, var(--beige) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    .skeleton-card { background: #fff; border-radius: var(--radius); padding: 22px 20px 18px; border: 1px solid var(--beige); }
-    .sk-title  { height: 24px; width: 70%; margin-bottom: 10px; }
-    .sk-badge  { height: 18px; width: 45%; margin-bottom: 18px; border-radius: 12px; }
-    .sk-stats  { height: 14px; width: 85%; margin-bottom: 18px; }
-    .sk-btn    { height: 36px; width: 100%; border-radius: 10px; }
-
-    /* ── LIVE INDICATOR ── */
-    .live-dot { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--sage); font-weight: 500; }
-    .live-dot::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--sage); display: block; animation: pulse-dot 2s infinite; }
-    @keyframes pulse-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
-
-    /* ── FILTERS ── */
-    .filters-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 24px; }
-    .filter-pill { padding: 8px 16px; border-radius: 24px; border: 1px solid var(--beige-dark); background: #fff; font-size: 13px; font-weight: 500; color: var(--text-mid); transition: all 0.18s; }
-    .filter-pill:hover  { border-color: var(--sage-light); color: var(--sage-dark); }
-    .filter-pill.active { background: var(--sage-dark); color: #fff; border-color: var(--sage-dark); }
-    .search-wrap { margin-left: auto; position: relative; }
-    .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; }
-    .search-bar { padding: 9px 14px 9px 36px; border: 1.5px solid var(--beige); border-radius: 24px; font-size: 13px; color: var(--text-dark); background: #fff; outline: none; transition: all 0.2s; width: 180px; }
-    .search-bar:focus { border-color: var(--sage-light); box-shadow: 0 0 0 3px rgba(122,158,126,0.12); width: 220px; }
-    .sort-select { padding: 9px 32px 9px 14px; border: 1.5px solid var(--beige); border-radius: 24px; font-size: 13px; color: var(--text-mid); background: #fff; outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%239C9088' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-
-    /* ── FORM ── */
-    .submit-card { background: #fff; border-radius: var(--radius); padding: 36px 32px; box-shadow: var(--shadow); border: 1px solid var(--beige); max-width: 580px; margin: 0 auto; }
-    .gender-tabs { display: flex; gap: 10px; margin-bottom: 26px; }
-    .gender-tab { flex: 1; padding: 12px 8px; border-radius: var(--radius-sm); border: 1.5px solid var(--beige); background: var(--cream); font-size: 13px; font-weight: 500; color: var(--text-mid); text-align: center; transition: all 0.2s; }
-    .gender-tab:hover { border-color: var(--beige-dark); background: #fff; }
-    .gender-tab.active-boy     { background: var(--blue-soft); border-color: var(--muted-blue); color: var(--muted-blue); }
-    .gender-tab.active-girl    { background: var(--pink-soft); border-color: var(--pink-accent); color: var(--pink-accent); }
-    .gender-tab.active-neutral { background: var(--sage-bg);  border-color: var(--sage); color: var(--sage-dark); }
-    .form-group { margin-bottom: 20px; }
-    .form-label { font-size: 13px; font-weight: 500; color: var(--text-mid); margin-bottom: 8px; display: block; }
-    .form-input, .form-textarea { width: 100%; border: 1.5px solid var(--beige); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 15px; color: var(--text-dark); background: var(--cream); outline: none; transition: all 0.2s; resize: vertical; }
-    .form-input:focus, .form-textarea:focus { border-color: var(--sage-light); background: #fff; box-shadow: 0 0 0 3px rgba(122,158,126,0.12); }
-    .form-hint { font-size: 12px; color: var(--text-soft); margin-top: 6px; }
-    .submit-btn { width: 100%; background: var(--sage-dark); color: #fff; border: none; border-radius: var(--radius-sm); padding: 15px; font-size: 15px; font-weight: 500; transition: all 0.25s; }
-    .submit-btn:hover    { background: #3A5A3E; transform: translateY(-1px); box-shadow: 0 6px 22px rgba(74,107,78,0.28); }
-    .submit-btn:active   { transform: translateY(0); }
-    .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
-    .anon-note { display: flex; align-items: center; gap: 8px; background: var(--sage-bg); border-radius: var(--radius-sm); padding: 12px 16px; margin-top: 16px; font-size: 13px; color: var(--sage-dark); }
-    .anon-note svg { flex-shrink: 0; }
-
-    /* ── ADMIN ── */
-    .admin-login-card { max-width: 380px; margin: 60px auto 40px; background: #fff; border-radius: var(--radius); padding: 40px 32px; box-shadow: var(--shadow-lg); border: 1px solid var(--beige); text-align: center; }
-    .admin-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--sage-bg); margin: 0 auto 18px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
-    .admin-stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 28px; }
-    .admin-stat-card { background: #fff; border: 1px solid var(--beige); border-radius: var(--radius-sm); padding: 18px; text-align: center; }
-    .admin-stat-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 500; color: var(--sage-dark); }
-    .admin-stat-label { font-size: 11px; color: var(--text-soft); margin-top: 4px; }
-    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; }
-    .export-btn { background: #fff; border: 1.5px solid var(--sage-light); color: var(--sage-dark); border-radius: var(--radius-sm); padding: 10px 18px; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
-    .export-btn:hover { background: var(--sage-bg); }
-    .danger-btn { background: #fff; border: 1.5px solid #F0CECE; color: #B44; border-radius: var(--radius-sm); padding: 10px 18px; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; }
-    .danger-btn:hover { background: #FEF2F2; }
-    .table-wrap { overflow-x: auto; background: #fff; border-radius: var(--radius); border: 1px solid var(--beige); box-shadow: var(--shadow); }
-    .admin-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 500px; }
-    .admin-table th { text-align: left; padding: 12px 16px; background: var(--cream); border-bottom: 1px solid var(--beige); font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--text-soft); }
-    .admin-table td { padding: 13px 16px; border-bottom: 1px solid var(--beige); color: var(--text-mid); vertical-align: middle; }
-    .admin-table tr:last-child td { border-bottom: none; }
-    .admin-table tr:hover td { background: var(--cream); }
-    .delete-row-btn { background: none; border: 1px solid #F0CECE; color: #C44; border-radius: 8px; padding: 5px 10px; font-size: 12px; transition: all 0.2s; cursor: pointer; }
-    .delete-row-btn:hover { background: #FEF2F2; }
-
-    /* ── TOAST ── */
-    .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--sage-dark); color: #fff; padding: 13px 28px; border-radius: 32px; font-size: 14px; font-weight: 500; z-index: 9998; transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap; pointer-events: none; max-width: calc(100vw - 40px); text-align: center; }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-
-    /* ── CONFETTI ── */
-    .confetti { position: fixed; pointer-events: none; z-index: 9999; width: 8px; height: 8px; border-radius: 2px; animation: confetti-fall linear forwards; }
-    @keyframes confetti-fall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(105vh) rotate(720deg); opacity: 0; } }
-
-    /* ── FOOTER ── */
-    footer { background: var(--text-dark); color: rgba(255,255,255,0.45); text-align: center; padding: 32px 20px; font-size: 13px; line-height: 1.8; }
-    footer strong { color: rgba(255,255,255,0.82); font-weight: 500; }
-
-    /* ── MOBILE ── */
-    @media (max-width: 680px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .hero { padding: 48px 16px 56px; }
-      .section { padding: 40px 16px; }
-      .submit-card { padding: 24px 18px; }
-      .gender-tab { padding: 10px 6px; font-size: 12px; }
-      .names-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-      .search-bar { width: 130px; }
-      .search-bar:focus { width: 160px; }
-      .admin-login-card { margin: 32px 16px; padding: 28px 20px; }
+    /* WORD CLOUD */
+    .word-cloud { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center; padding:8px 0; min-height:80px; }
+    .cloud-word {
+      font-family:'Playfair Display',serif; font-weight:500;
+      border-radius:32px; padding:6px 16px;
+      cursor:pointer; transition:all 0.2s; touch-action:manipulation;
+      line-height:1.2; text-align:center;
     }
-    @media (max-width: 420px) {
-      .hero h1 { font-size: 28px; }
-      .hero-btns { flex-direction: column; align-items: center; }
-      .names-grid { grid-template-columns: 1fr 1fr; }
-      .gender-tabs { flex-direction: column; }
+    .cloud-word:active { transform:scale(0.95); }
+    .cloud-word.boy-word    { background:var(--blue-soft); color:var(--muted-blue); }
+    .cloud-word.girl-word   { background:var(--pink-soft); color:var(--pink-accent); }
+    .cloud-word.neutral-word{ background:var(--sage-bg);   color:var(--sage-dark); }
+    .cloud-word.voted-word  { outline:2px solid var(--gold); }
+
+    /* SKELETONS */
+    .skeleton { background:linear-gradient(90deg,var(--beige) 25%,var(--cream) 50%,var(--beige) 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; border-radius:8px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .skeleton-card { background:#fff; border-radius:var(--radius); padding:18px 16px 14px; border:1px solid var(--beige); }
+    .sk-title  { height:22px; width:65%; margin-bottom:10px; }
+    .sk-badge  { height:16px; width:40%; margin-bottom:12px; border-radius:12px; }
+    .sk-stats  { height:12px; width:80%; margin-bottom:12px; }
+    .sk-btn    { height:38px; width:100%; border-radius:10px; }
+
+    /* LIVE DOT */
+    .live-dot { display:inline-flex; align-items:center; gap:5px; font-size:11px; color:var(--sage); font-weight:500; }
+    .live-dot::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--sage); display:block; animation:pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+    /* FILTERS */
+    .filters-bar { display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:20px; }
+    .filter-pill { padding:8px 14px; border-radius:24px; border:1px solid var(--beige-dark); background:#fff; font-size:13px; font-weight:500; color:var(--text-mid); transition:all 0.18s; touch-action:manipulation; }
+    .filter-pill:active { transform:scale(0.97); }
+    .filter-pill.active { background:var(--sage-dark); color:#fff; border-color:var(--sage-dark); }
+    .filter-row2 { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+    .sort-select { flex:1; min-width:130px; padding:10px 32px 10px 14px; border:1.5px solid var(--beige); border-radius:24px; font-size:13px; color:var(--text-mid); background:#fff; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%239C9088' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; }
+    .search-bar { flex:1; min-width:130px; padding:10px 14px; border:1.5px solid var(--beige); border-radius:24px; font-size:13px; color:var(--text-dark); background:#fff; outline:none; transition:border-color 0.2s; }
+    .search-bar:focus { border-color:var(--sage-light); }
+
+    /* FORM */
+    .submit-card { background:#fff; border-radius:var(--radius); padding:24px 18px; box-shadow:var(--shadow); border:1px solid var(--beige); max-width:560px; margin:0 auto; }
+    .gender-tabs { display:flex; gap:8px; margin-bottom:22px; }
+    .gender-tab { flex:1; padding:12px 6px; border-radius:var(--radius-sm); border:1.5px solid var(--beige); background:var(--cream); font-size:13px; font-weight:500; color:var(--text-mid); text-align:center; transition:all 0.2s; touch-action:manipulation; }
+    .gender-tab:active { transform:scale(0.97); }
+    .gender-tab.active-boy     { background:var(--blue-soft); border-color:var(--muted-blue); color:var(--muted-blue); }
+    .gender-tab.active-girl    { background:var(--pink-soft); border-color:var(--pink-accent); color:var(--pink-accent); }
+    .gender-tab.active-neutral { background:var(--sage-bg);   border-color:var(--sage); color:var(--sage-dark); }
+    .form-group { margin-bottom:18px; }
+    .form-label { font-size:13px; font-weight:500; color:var(--text-mid); margin-bottom:8px; display:block; }
+    .form-input, .form-textarea { width:100%; border:1.5px solid var(--beige); border-radius:var(--radius-sm); padding:13px 16px; font-size:16px; color:var(--text-dark); background:var(--cream); outline:none; transition:all 0.2s; resize:vertical; -webkit-appearance:none; }
+    .form-input:focus, .form-textarea:focus { border-color:var(--sage-light); background:#fff; box-shadow:0 0 0 3px rgba(122,158,126,0.12); }
+    .form-hint { font-size:12px; color:var(--text-soft); margin-top:6px; }
+    .submit-btn { width:100%; background:var(--sage-dark); color:#fff; border:none; border-radius:var(--radius-sm); padding:16px; font-size:16px; font-weight:500; transition:all 0.2s; touch-action:manipulation; }
+    .submit-btn:active { background:#3A5A3E; transform:scale(0.99); }
+    .submit-btn:disabled { opacity:0.55; cursor:not-allowed; transform:none; }
+    .anon-note { display:flex; align-items:center; gap:8px; background:var(--sage-bg); border-radius:var(--radius-sm); padding:12px 14px; margin-top:14px; font-size:13px; color:var(--sage-dark); }
+    .anon-note svg { flex-shrink:0; }
+
+    /* ADMIN */
+    .admin-login-card { max-width:360px; margin:40px auto 32px; background:#fff; border-radius:var(--radius); padding:32px 24px; box-shadow:var(--shadow-lg); border:1px solid var(--beige); text-align:center; }
+    .admin-icon { width:52px; height:52px; border-radius:50%; background:var(--sage-bg); margin:0 auto 16px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+    .admin-stats-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:10px; margin-bottom:24px; }
+    .admin-stat-card { background:#fff; border:1px solid var(--beige); border-radius:var(--radius-sm); padding:16px; text-align:center; }
+    .admin-stat-num { font-family:'Playfair Display',serif; font-size:24px; font-weight:500; color:var(--sage-dark); }
+    .admin-stat-label { font-size:11px; color:var(--text-soft); margin-top:4px; }
+    .admin-actions { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+    .export-btn { background:#fff; border:1.5px solid var(--sage-light); color:var(--sage-dark); border-radius:var(--radius-sm); padding:10px 16px; font-size:13px; font-weight:500; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s; }
+    .export-btn:active { background:var(--sage-bg); }
+    .danger-btn { background:#fff; border:1.5px solid #F0CECE; color:#B44; border-radius:var(--radius-sm); padding:10px 16px; font-size:13px; font-weight:500; display:inline-flex; align-items:center; gap:6px; transition:all 0.2s; }
+    .danger-btn:active { background:#FEF2F2; }
+    .table-wrap { overflow-x:auto; background:#fff; border-radius:var(--radius); border:1px solid var(--beige); box-shadow:var(--shadow); -webkit-overflow-scrolling:touch; }
+    .admin-table { width:100%; border-collapse:collapse; font-size:13px; min-width:480px; }
+    .admin-table th { text-align:left; padding:11px 14px; background:var(--cream); border-bottom:1px solid var(--beige); font-size:10px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:var(--text-soft); }
+    .admin-table td { padding:12px 14px; border-bottom:1px solid var(--beige); color:var(--text-mid); vertical-align:middle; }
+    .admin-table tr:last-child td { border-bottom:none; }
+    .delete-row-btn { background:none; border:1px solid #F0CECE; color:#C44; border-radius:8px; padding:5px 10px; font-size:11px; transition:all 0.2s; cursor:pointer; }
+
+    /* TOAST */
+    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(100px); background:var(--sage-dark); color:#fff; padding:13px 24px; border-radius:32px; font-size:14px; font-weight:500; z-index:9998; transition:transform 0.38s cubic-bezier(0.34,1.56,0.64,1); pointer-events:none; max-width:calc(100vw - 32px); text-align:center; white-space:nowrap; }
+    .toast.show { transform:translateX(-50%) translateY(0); }
+
+    /* CONFETTI */
+    .confetti { position:fixed; pointer-events:none; z-index:9999; width:8px; height:8px; border-radius:2px; animation:confetti-fall linear forwards; }
+    @keyframes confetti-fall { 0%{transform:translateY(0) rotate(0deg);opacity:1} 100%{transform:translateY(105vh) rotate(720deg);opacity:0} }
+
+    /* FOOTER */
+    footer { background:var(--text-dark); color:rgba(255,255,255,0.45); text-align:center; padding:28px 16px; font-size:13px; line-height:1.8; }
+    footer strong { color:rgba(255,255,255,0.82); font-weight:500; }
+
+    /* MOBILE BREAKPOINTS */
+    @media (max-width:640px) {
+      .nav-links { display:none; }
+      .hamburger { display:flex; }
+    }
+    @media (min-width:641px) {
+      .hero-btns { flex-direction:row; }
+      .btn-primary, .btn-secondary { width:auto; max-width:none; }
+      .names-grid { grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); }
+      .hero { padding:64px 24px 72px; }
+      .section { padding:52px 24px; }
+      .submit-card { padding:36px 32px; }
+    }
+    @media (min-width:641px) and (max-width:900px) {
+      .names-grid { grid-template-columns:repeat(3,1fr); }
     }
   </style>
 </head>
 <body>
 
-<!-- ══ CONFIG BANNER (shown if Firebase not set up) ══ -->
-<div id="config-banner">
-  ⚠️ <strong>Firebase not configured yet.</strong>
-  Open <code>index.html</code> and replace the Firebase config at the top of the &lt;script&gt; section.
-  <a href="https://console.firebase.google.com" target="_blank" style="color:#7A5800; text-decoration:underline; margin-left:6px;">Open Firebase Console →</a>
-</div>
-
-<!-- ══ NAV ════════════════════════════════════════════ -->
+<!-- NAV -->
 <nav>
-  <div class="nav-logo" style="font-family:'Playfair Display',serif;">little <span style="color:var(--gold);">names</span></div>
+  <div class="nav-logo">little <span>names</span></div>
   <div class="nav-links">
     <button class="nav-btn active" id="nav-home"    onclick="showPage('home')">Home</button>
-    <button class="nav-btn"        id="nav-browse"  onclick="showPage('browse')">Browse Names</button>
-    <button class="nav-btn"        id="nav-suggest" onclick="showPage('suggest')">Suggest Names</button>
-    <button class="nav-btn"        id="nav-admin"   onclick="showPage('admin')">Parents ✦</button>
+    <button class="nav-btn"        id="nav-browse"  onclick="showPage('browse')">Browse</button>
+    <button class="nav-btn"        id="nav-suggest" onclick="showPage('suggest')">Suggest ✦</button>
+    <button class="nav-btn"        id="nav-admin"   onclick="showPage('admin')">Parents</button>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 <div class="mobile-menu" id="mobile-menu">
-  <button class="nav-btn" onclick="showPage('home');   closeMenu()">Home</button>
-  <button class="nav-btn" onclick="showPage('browse'); closeMenu()">Browse Names</button>
+  <button class="nav-btn" onclick="showPage('home');   closeMenu()">🏠 Home</button>
+  <button class="nav-btn" onclick="showPage('browse'); closeMenu()">🔍 Browse Names</button>
   <button class="nav-btn" onclick="showPage('suggest');closeMenu()">✦ Suggest Names</button>
-  <button class="nav-btn" onclick="showPage('admin');  closeMenu()">Parents Dashboard</button>
+  <button class="nav-btn" onclick="showPage('admin');  closeMenu()">🔐 Parents Dashboard</button>
 </div>
 
-<!-- ══ HOME ═══════════════════════════════════════════ -->
+<!-- HOME -->
 <div id="page-home" class="page active">
   <div class="hero">
     <div class="hero-orb1"></div><div class="hero-orb2"></div>
-    <div class="hero-badge">✦ A new arrival is coming ✦</div>
-    <h1 style="font-family:'Playfair Display',serif;">Help Us Choose the<br><em style="font-style:italic;color:var(--sage-dark);">Perfect Baby Name</em></h1>
-    <p class="hero-sub">Share your favourite name ideas anonymously and vote for the ones you love. Every suggestion helps us find the perfect name for our little one.</p>
+    <div class="hero-badge">✦ A little hunny is on the way ✦</div>
+    <h1 style="font-family:'Playfair Display',serif;">Help Us Choose the<br><em>Perfect Baby Name</em></h1>
+    <p class="hero-sub">Share your favourite name ideas anonymously and vote for the ones you love. Every suggestion counts!</p>
     <div class="hero-btns">
       <button class="btn-primary" onclick="showPage('suggest');closeMenu()">✦ Suggest Names</button>
       <button class="btn-secondary" onclick="showPage('browse');closeMenu()">Browse All Names →</button>
@@ -322,52 +291,67 @@
     <div class="stat-item"><span class="stat-num" id="h-votes" style="font-family:'Playfair Display',serif;">—</span><span class="stat-label">Votes</span></div>
     <div class="stat-item"><span class="stat-num" id="h-boys"  style="font-family:'Playfair Display',serif;">—</span><span class="stat-label">Boy Names</span></div>
     <div class="stat-item"><span class="stat-num" id="h-girls" style="font-family:'Playfair Display',serif;">—</span><span class="stat-label">Girl Names</span></div>
-    <div class="stat-item"><span class="live-dot" style="justify-content:center; padding-top:2px;">Live</span><span class="stat-label" style="margin-top:4px;">Real-time sync</span></div>
+    <div class="stat-item"><span class="live-dot" style="justify-content:center;padding-top:3px;"></span><span class="stat-label" style="margin-top:4px;">Live</span></div>
   </div>
 
+  <!-- Word Cloud -->
+  <div class="section section-white">
+    <div class="section-inner">
+      <div class="section-hd">
+        <div class="section-tag">All Names at a Glance</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,34px);font-weight:500;">Name <em style="font-style:italic;color:var(--sage-dark);">Word Cloud</em></h2>
+        <p class="section-sub">Tap any name to vote for it</p>
+      </div>
+      <div class="word-cloud" id="word-cloud"></div>
+    </div>
+  </div>
+
+  <!-- Top Voted -->
   <div class="section">
     <div class="section-inner">
       <div class="section-hd">
         <div class="section-tag">Community Favourites</div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);font-weight:500;color:var(--text-dark);">Top <em style="font-style:italic;color:var(--sage-dark);">Voted</em> Names</h2>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,34px);font-weight:500;">Top <em style="font-style:italic;color:var(--sage-dark);">Voted</em> Names</h2>
         <p class="section-sub">The names everyone is loving right now</p>
       </div>
       <div class="names-grid" id="home-top"></div>
     </div>
   </div>
 
+  <!-- Recently Added -->
   <div class="section section-white">
     <div class="section-inner">
       <div class="section-hd">
         <div class="section-tag">Fresh Additions</div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);font-weight:500;color:var(--text-dark);"><em style="font-style:italic;color:var(--sage-dark);">Recently</em> Added</h2>
-        <p class="section-sub">The latest name suggestions from friends &amp; family</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,34px);font-weight:500;"><em style="font-style:italic;color:var(--sage-dark);">Recently</em> Added</h2>
+        <p class="section-sub">The latest suggestions from friends &amp; family</p>
       </div>
       <div class="names-grid" id="home-recent"></div>
     </div>
   </div>
 
+  <!-- CTA -->
   <div class="section section-cta">
     <div class="section-inner" style="text-align:center;">
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);font-weight:500;">Have a Name in <em style="font-style:italic;color:var(--sage-dark);">Mind?</em></h2>
-      <p class="section-sub" style="margin:14px 0 28px;">Your suggestion is completely anonymous — it takes just 10 seconds.</p>
-      <button class="btn-primary" onclick="showPage('suggest')">✦ Add Your Suggestion</button>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,32px);font-weight:500;">Have a Name in <em style="font-style:italic;color:var(--sage-dark);">Mind?</em></h2>
+      <p class="section-sub" style="margin:12px 0 24px;">Your suggestion is completely anonymous — takes just 10 seconds.</p>
+      <button class="btn-primary" style="max-width:240px;" onclick="showPage('suggest')">✦ Add Your Suggestion</button>
     </div>
   </div>
 
   <footer>
-    <strong>little names</strong> — A private name-gathering space for our family &amp; friends<br>
-    <span style="font-size:11px;">All submissions are anonymous &nbsp;·&nbsp; Synced in real-time ·&nbsp; Made with love ♡</span>
+    <strong>little names</strong> — A little hunny is on the way 🍯<br>
+    <span style="font-size:11px;">All submissions are anonymous &nbsp;·&nbsp; Syncs in real-time &nbsp;·&nbsp; Made with love ♡</span>
   </footer>
 </div>
 
-<!-- ══ BROWSE ══════════════════════════════════════════ -->
+<!-- BROWSE -->
 <div id="page-browse" class="page">
   <div class="section">
     <div class="section-inner">
       <div class="section-hd">
         <div class="section-tag">All Suggestions</div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);font-weight:500;">Browse <em style="font-style:italic;color:var(--sage-dark);">Baby Names</em></h2>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,34px);font-weight:500;">Browse <em style="font-style:italic;color:var(--sage-dark);">Baby Names</em></h2>
         <p class="section-sub">Vote for your favourites and help us decide</p>
       </div>
       <div class="filters-bar">
@@ -375,29 +359,28 @@
         <button class="filter-pill"        onclick="setFilter('boy',     this)">Boys</button>
         <button class="filter-pill"        onclick="setFilter('girl',    this)">Girls</button>
         <button class="filter-pill"        onclick="setFilter('neutral', this)">Neutral</button>
+      </div>
+      <div class="filter-row2">
         <select class="sort-select" id="sort-select" onchange="renderBrowse()">
           <option value="votes">Most Voted</option>
           <option value="suggestions">Most Suggested</option>
           <option value="recent">Recently Added</option>
           <option value="alpha">A → Z</option>
         </select>
-        <div class="search-wrap">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9C9088" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input class="search-bar" type="search" placeholder="Search names…" id="search-input" oninput="renderBrowse()" />
-        </div>
+        <input class="search-bar" type="search" placeholder="🔍 Search names…" id="search-input" oninput="renderBrowse()" />
       </div>
       <div class="names-grid" id="browse-names"></div>
     </div>
   </div>
 </div>
 
-<!-- ══ SUGGEST ════════════════════════════════════════ -->
+<!-- SUGGEST -->
 <div id="page-suggest" class="page">
   <div class="section">
     <div class="section-inner">
       <div class="section-hd">
         <div class="section-tag">Share Your Ideas</div>
-        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,34px);font-weight:500;">Suggest a <em style="font-style:italic;color:var(--sage-dark);">Baby Name</em></h2>
+        <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,34px);font-weight:500;">Suggest a <em style="font-style:italic;color:var(--sage-dark);">Baby Name</em></h2>
         <p class="section-sub">Completely anonymous — no account needed</p>
       </div>
       <div class="submit-card">
@@ -411,65 +394,65 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="names-input">Your Name Suggestion(s)</label>
-          <textarea class="form-textarea" id="names-input" rows="5"
-            placeholder="Enter one or more names, separated by commas or new lines…&#10;&#10;e.g. Noah, Liam, Oliver"
-            style="min-height:120px;"></textarea>
-          <p class="form-hint">Suggest multiple names at once — separate with commas or new lines.</p>
+          <textarea class="form-textarea" id="names-input" rows="4"
+            placeholder="Enter one or more names…&#10;&#10;e.g. Noah, Liam, Oliver"
+            style="min-height:110px;"></textarea>
+          <p class="form-hint">Separate multiple names with commas or new lines.</p>
         </div>
         <button class="submit-btn" id="submit-btn" onclick="submitNames()">Submit Suggestions ✦</button>
         <div class="anon-note">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Your suggestion is 100% anonymous. No name, email, or account needed.
+          100% anonymous — no name, email, or account needed.
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ══ ADMIN ══════════════════════════════════════════ -->
+<!-- ADMIN -->
 <div id="page-admin" class="page">
   <div id="admin-login" style="padding:0 16px;">
     <div class="admin-login-card">
       <div class="admin-icon">🔐</div>
-      <h2 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px;">Parents' Dashboard</h2>
-      <p style="font-size:14px;color:var(--text-soft);margin-bottom:24px;">Private access for the expecting parents</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:8px;">Parents' Dashboard</h2>
+      <p style="font-size:13px;color:var(--text-soft);margin-bottom:20px;">Private access for the expecting parents</p>
       <div class="form-group" style="text-align:left;">
         <label class="form-label" for="admin-pw">Password</label>
         <input class="form-input" type="password" id="admin-pw" placeholder="Enter your password" onkeydown="if(event.key==='Enter') adminLogin()" />
       </div>
       <button class="submit-btn" onclick="adminLogin()">Sign In →</button>
-      <p style="font-size:11px;color:var(--text-soft);margin-top:14px;">Default: <code style="background:var(--cream);padding:2px 6px;border-radius:4px;">babynames2025</code></p>
+      <p style="font-size:11px;color:var(--text-soft);margin-top:12px;">Default: <code style="background:var(--cream);padding:2px 6px;border-radius:4px;">babynames2025</code></p>
     </div>
   </div>
   <div id="admin-dash" style="display:none;">
     <div class="section">
       <div class="section-inner">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:28px;gap:12px;flex-wrap:wrap;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;gap:12px;flex-wrap:wrap;">
           <div>
-            <h2 style="font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,30px);font-weight:500;">Parents' Dashboard</h2>
-            <p style="color:var(--text-soft);font-size:13px;margin-top:4px;">Manage all name submissions · <span class="live-dot">Live sync</span></p>
+            <h2 style="font-family:'Playfair Display',serif;font-size:clamp(20px,4vw,28px);font-weight:500;">Parents' Dashboard</h2>
+            <p style="color:var(--text-soft);font-size:13px;margin-top:4px;"><span class="live-dot">Live sync</span></p>
           </div>
           <button class="danger-btn" style="border-color:var(--beige-dark);color:var(--text-soft);" onclick="adminLogout()">Sign Out</button>
         </div>
         <div class="admin-stats-grid" id="admin-stats"></div>
         <div class="admin-actions">
           <button class="export-btn" onclick="exportCSV()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Export CSV
           </button>
-          <button class="danger-btn" onclick="if(confirm('Reset ALL votes?')) resetVotes()">Reset All Votes</button>
-          <button class="danger-btn" onclick="if(confirm('Delete ALL names? Cannot be undone.')) clearAll()">Clear All Names</button>
+          <button class="danger-btn" onclick="if(confirm('Reset ALL votes?')) resetVotes()">Reset Votes</button>
+          <button class="danger-btn" onclick="if(confirm('Delete ALL names?')) clearAll()">Clear All</button>
         </div>
-        <details style="margin-bottom:24px;background:#fff;border:1px solid var(--beige);border-radius:var(--radius-sm);padding:14px 18px;">
+        <details style="margin-bottom:20px;background:#fff;border:1px solid var(--beige);border-radius:var(--radius-sm);padding:12px 16px;">
           <summary style="cursor:pointer;font-size:13px;font-weight:500;color:var(--text-mid);list-style:none;">🔑 Change Admin Password</summary>
-          <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
-            <input class="form-input" type="password" id="new-pw" placeholder="New password (min 6 chars)" style="flex:1;min-width:180px;" />
-            <button class="export-btn" onclick="changePw()">Save Password</button>
+          <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+            <input class="form-input" type="password" id="new-pw" placeholder="New password (min 6 chars)" style="flex:1;min-width:160px;" />
+            <button class="export-btn" onclick="changePw()">Save</button>
           </div>
         </details>
         <div class="table-wrap">
           <table class="admin-table">
-            <thead><tr><th>Name</th><th>Gender</th><th>Suggestions</th><th>Votes</th><th>Added</th><th>Remove</th></tr></thead>
+            <thead><tr><th>Name</th><th>Gender</th><th>Suggested</th><th>Votes</th><th>Added</th><th></th></tr></thead>
             <tbody id="admin-tbody"></tbody>
           </table>
         </div>
@@ -480,13 +463,7 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<!-- ══ FIREBASE SDK ════════════════════════════════════ -->
 <script type="module">
-// ╔══════════════════════════════════════════════════════════════╗
-// ║  STEP 1: PASTE YOUR FIREBASE CONFIG HERE                     ║
-// ║  Replace the placeholder values below with your own config   ║
-// ║  Get it from: Firebase Console → Project Settings → Web App  ║
-// ╚══════════════════════════════════════════════════════════════╝
 const firebaseConfig = {
   apiKey:            "AIzaSyA9ItHrwWpjBdNW8Dtf4got5j7Obq9UnMo",
   authDomain:        "baby-names-2a835.firebaseapp.com",
@@ -495,26 +472,16 @@ const firebaseConfig = {
   messagingSenderId: "865677091814",
   appId:             "1:865677091814:web:f64c85e6e9eb6b39da2c27"
 };
-// ═══════════════════════════════════════════════════════════════
 
-import { initializeApp }                          from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, doc, onSnapshot,
-         addDoc, updateDoc, deleteDoc, getDocs,
-         query, orderBy, serverTimestamp,
-         increment, runTransaction }              from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, doc, onSnapshot, addDoc, updateDoc,
+         deleteDoc, getDocs, query, orderBy, serverTimestamp,
+         increment, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ── Check if config is filled in ──
-const isConfigured = firebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE";
-if (!isConfigured) {
-  document.getElementById('config-banner').style.display = 'block';
-}
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app);
 
-// ── Init Firebase ──
-const app = isConfigured ? initializeApp(firebaseConfig) : null;
-const db  = isConfigured ? getFirestore(app) : null;
-
-// ── State ──
-let names     = [];       // live-synced array from Firestore
+let names     = [];
 let filter    = 'all';
 let selGender = 'boy';
 let adminIn   = false;
@@ -524,292 +491,265 @@ const VID_KEY = 'littlenames_visitor';
 function getAdminPw()   { return localStorage.getItem(PW_KEY) || 'babynames2025'; }
 function getVisitorId() {
   let id = sessionStorage.getItem(VID_KEY);
-  if (!id) { id = Math.random().toString(36).slice(2) + Date.now().toString(36); sessionStorage.setItem(VID_KEY, id); }
+  if (!id) { id = Math.random().toString(36).slice(2)+Date.now().toString(36); sessionStorage.setItem(VID_KEY,id); }
   return id;
 }
-function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function esc(s) { return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
-// ── Real-time listener ──
+// Real-time sync
 function startSync() {
-  if (!db) {
-    renderSkeletons('home-top', 4);
-    renderSkeletons('home-recent', 4);
-    renderSkeletons('browse-names', 6);
-    return;
-  }
-  const q = query(collection(db, 'names'), orderBy('createdAt', 'desc'));
+  const q = query(collection(db,'names'), orderBy('createdAt','desc'));
   onSnapshot(q, snap => {
-    names = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    names = snap.docs.map(d=>({id:d.id,...d.data()}));
     updateStats();
     renderHome();
+    renderWordCloud();
     if (document.getElementById('page-browse').classList.contains('active')) renderBrowse();
     if (adminIn) renderAdminDash();
   });
 }
 
-// ── Skeletons ──
-function skCard() {
-  return `<div class="skeleton-card"><div class="skeleton sk-title"></div><div class="skeleton sk-badge"></div><div class="skeleton sk-stats"></div><div class="skeleton sk-btn"></div></div>`;
-}
-function renderSkeletons(elId, n) {
-  const el = document.getElementById(elId);
-  if (el) el.innerHTML = Array(n).fill(skCard()).join('');
+// Skeletons
+function skCard() { return `<div class="skeleton-card"><div class="skeleton sk-title"></div><div class="skeleton sk-badge"></div><div class="skeleton sk-stats"></div><div class="skeleton sk-btn"></div></div>`; }
+function renderSkeletons(id,n) { const el=document.getElementById(id); if(el) el.innerHTML=Array(n).fill(skCard()).join(''); }
+
+function heartSvg(f) {
+  return `<svg viewBox="0 0 24 24" fill="${f?'#C4A45A':'none'}" stroke="${f?'#C4A45A':'currentColor'}" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
 }
 
-// ── Heart SVG ──
-function heartSvg(filled) {
-  return `<svg viewBox="0 0 24 24" fill="${filled?'#C4A45A':'none'}" stroke="${filled?'#C4A45A':'currentColor'}" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
-}
-
-// ── Name card ──
 function makeCard(n, rank) {
-  const vid    = getVisitorId();
-  const voted  = Array.isArray(n.voters) && n.voters.includes(vid);
-  const gLabel = n.gender==='boy' ? '♂ Boy' : n.gender==='girl' ? '♀ Girl' : '◇ Neutral';
-  const badge  = rank<=3 ? `<div class="top-badge">${rank===1?'✦ #1':rank===2?'✦ #2':'✦ #3'}</div>` : '';
-  return `
-    <div class="name-card ${esc(n.gender)}" id="card-${n.id}">
-      <div class="name-card-bar"></div>${badge}
-      <div class="name-text" style="font-family:'Playfair Display',serif;">${esc(n.name)}</div>
-      <div class="gender-badge ${esc(n.gender)}">${gLabel}</div>
-      <div class="name-stats" id="stats-${n.id}">
-        <span><strong>${n.suggCount||1}</strong> suggested</span>
-        <span><strong>${n.voteCount||0}</strong> votes</span>
-      </div>
-      <button class="vote-btn ${voted?'voted':''}" id="vbtn-${n.id}" onclick="toggleVote('${n.id}')">
-        ${heartSvg(voted)} ${voted?'Loved ✓':'Love this name'}
-      </button>
-    </div>`;
+  const vid   = getVisitorId();
+  const voted = (n.voters||[]).includes(vid);
+  const gLbl  = n.gender==='boy'?'♂ Boy':n.gender==='girl'?'♀ Girl':'◇ Neutral';
+  const badge = rank<=3?`<div class="top-badge">${rank===1?'✦ #1':rank===2?'✦ #2':'✦ #3'}</div>`:'';
+  return `<div class="name-card ${esc(n.gender)}" id="card-${n.id}">
+    <div class="name-card-bar"></div>${badge}
+    <div class="name-text" style="font-family:'Playfair Display',serif;">${esc(n.name)}</div>
+    <div class="gender-badge ${esc(n.gender)}">${gLbl}</div>
+    <div class="name-stats" id="stats-${n.id}">
+      <span><strong>${n.suggCount||1}</strong> suggested</span>
+      <span><strong>${n.voteCount||0}</strong> votes</span>
+    </div>
+    <button class="vote-btn ${voted?'voted':''}" id="vbtn-${n.id}" onclick="toggleVote('${n.id}')">
+      ${heartSvg(voted)} ${voted?'Loved ✓':'Love this'}
+    </button>
+  </div>`;
 }
 
-// ── Vote ──
+// Word Cloud
+function renderWordCloud() {
+  const el = document.getElementById('word-cloud');
+  if (!el || !names.length) {
+    if (el) el.innerHTML = `<p style="color:var(--text-soft);font-size:14px;">Names will appear here once submitted 🌱</p>`;
+    return;
+  }
+  const vid = getVisitorId();
+  const maxVotes = Math.max(...names.map(n=>n.voteCount||0), 1);
+  const sorted = [...names].sort((a,b)=>(b.voteCount||0)-(a.voteCount||0));
+  el.innerHTML = sorted.map(n => {
+    const ratio  = (n.voteCount||0) / maxVotes;
+    const size   = 13 + Math.round(ratio * 20);
+    const voted  = (n.voters||[]).includes(vid);
+    const cls    = n.gender==='boy'?'boy-word':n.gender==='girl'?'girl-word':'neutral-word';
+    return `<span class="cloud-word ${cls} ${voted?'voted-word':''}"
+      style="font-size:${size}px;"
+      onclick="toggleVote('${n.id}')"
+      title="${esc(n.name)} — ${n.voteCount||0} votes"
+    >${esc(n.name)}</span>`;
+  }).join('');
+}
+
 window.toggleVote = async function(id) {
-  if (!db) { showToast('Firebase not configured yet.'); return; }
-  const vid  = getVisitorId();
-  const ref  = doc(db, 'names', id);
+  const vid = getVisitorId();
+  const ref = doc(db,'names',id);
   try {
     await runTransaction(db, async tx => {
       const snap = await tx.get(ref);
       if (!snap.exists()) return;
-      const voters = snap.data().voters || [];
+      const voters = snap.data().voters||[];
       const idx    = voters.indexOf(vid);
-      if (idx === -1) {
-        tx.update(ref, { voters: [...voters, vid], voteCount: increment(1) });
-      } else {
-        const updated = voters.filter(v => v !== vid);
-        tx.update(ref, { voters: updated, voteCount: increment(-1) });
-      }
+      if (idx===-1) tx.update(ref,{voters:[...voters,vid],voteCount:increment(1)});
+      else          tx.update(ref,{voters:voters.filter(v=>v!==vid),voteCount:increment(-1)});
     });
-  } catch(e) { showToast('Could not save vote — please try again.'); }
+  } catch(e) { showToast('Could not save vote — try again.'); }
 };
 
-// ── Stats ──
 function updateStats() {
-  const totalVotes = names.reduce((s,n) => s+(n.voteCount||0), 0);
-  const set = (id, v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
-  set('h-total', names.length);
-  set('h-votes', totalVotes);
-  set('h-boys',  names.filter(n=>n.gender==='boy').length);
-  set('h-girls', names.filter(n=>n.gender==='girl').length);
+  const tv = names.reduce((s,n)=>s+(n.voteCount||0),0);
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+  set('h-total',names.length); set('h-votes',tv);
+  set('h-boys', names.filter(n=>n.gender==='boy').length);
+  set('h-girls',names.filter(n=>n.gender==='girl').length);
 }
 
-// ── Home ──
 function renderHome() {
-  const empty = `<div class="empty-state"><div class="icon">🌱</div><p>No names yet — be the first to suggest one!</p></div>`;
-  const top    = [...names].sort((a,b)=>(b.voteCount||0)-(a.voteCount||0)).slice(0,6);
-  const recent = [...names].slice(0,6); // already ordered by createdAt desc
+  const empty=`<div class="empty-state"><div class="icon">🌱</div><p>No names yet — be the first!</p></div>`;
+  const top   =[...names].sort((a,b)=>(b.voteCount||0)-(a.voteCount||0)).slice(0,6);
+  const recent=[...names].slice(0,6);
   document.getElementById('home-top').innerHTML    = top.length    ? top.map((n,i)=>makeCard(n,i+1)).join('') : empty;
   document.getElementById('home-recent').innerHTML = recent.length ? recent.map(n=>makeCard(n,99)).join('')   : empty;
 }
 
-// ── Browse ──
-window.setFilter = function(f, el) {
-  filter = f;
+window.setFilter = function(f,el) {
+  filter=f;
   document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
   renderBrowse();
 };
 function renderBrowse() {
-  const sort = (document.getElementById('sort-select')||{}).value || 'votes';
-  const q    = ((document.getElementById('search-input')||{}).value||'').toLowerCase();
-  let list   = names.filter(n => {
-    if (filter!=='all' && n.gender!==filter) return false;
-    if (q && !n.name.toLowerCase().includes(q)) return false;
+  const sort=(document.getElementById('sort-select')||{}).value||'votes';
+  const q=((document.getElementById('search-input')||{}).value||'').toLowerCase();
+  let list=names.filter(n=>{
+    if(filter!=='all'&&n.gender!==filter) return false;
+    if(q&&!n.name.toLowerCase().includes(q)) return false;
     return true;
   });
-  if (sort==='votes')       list.sort((a,b)=>(b.voteCount||0)-(a.voteCount||0));
-  else if (sort==='suggestions') list.sort((a,b)=>(b.suggCount||1)-(a.suggCount||1));
-  else if (sort==='recent') list.sort((a,b)=>{ const ta=a.createdAt?.toMillis?.()||0, tb=b.createdAt?.toMillis?.()||0; return tb-ta; });
-  else                      list.sort((a,b)=>a.name.localeCompare(b.name));
-  const el = document.getElementById('browse-names');
-  if (!el) return;
-  el.innerHTML = list.length
-    ? list.map((n,i)=>makeCard(n,i+1)).join('')
-    : `<div class="empty-state"><div class="icon">${q?'🔍':'💛'}</div><p>${q?`No names match "${esc(q)}".`:'No names in this category yet.'}</p></div>`;
+  if(sort==='votes')            list.sort((a,b)=>(b.voteCount||0)-(a.voteCount||0));
+  else if(sort==='suggestions') list.sort((a,b)=>(b.suggCount||1)-(a.suggCount||1));
+  else if(sort==='recent')      list.sort((a,b)=>{const ta=a.createdAt?.toMillis?.()||0,tb=b.createdAt?.toMillis?.()||0;return tb-ta;});
+  else                          list.sort((a,b)=>a.name.localeCompare(b.name));
+  const el=document.getElementById('browse-names');
+  if(!el) return;
+  el.innerHTML=list.length
+    ?list.map((n,i)=>makeCard(n,i+1)).join('')
+    :`<div class="empty-state"><div class="icon">${q?'🔍':'💛'}</div><p>${q?`No names match "${esc(q)}".`:'No names in this category yet.'}</p></div>`;
 }
-window.renderBrowse = renderBrowse;
+window.renderBrowse=renderBrowse;
 
-// ── Suggest ──
-window.selectGender = function(g) {
-  selGender = g;
-  ['boy','girl','neutral'].forEach(t => {
-    const el = document.getElementById('tab-'+t);
-    if (el) el.className = 'gender-tab' + (t===g ? ' active-'+t : '');
+window.selectGender=function(g){
+  selGender=g;
+  ['boy','girl','neutral'].forEach(t=>{
+    const el=document.getElementById('tab-'+t);
+    if(el) el.className='gender-tab'+(t===g?' active-'+t:'');
   });
 };
 
-window.submitNames = async function() {
-  if (!db) { showToast('Firebase not configured yet.'); return; }
-  const input = (document.getElementById('names-input').value||'').trim();
-  if (!input) { showToast('Please enter at least one name!'); return; }
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true; btn.textContent = 'Submitting…';
-
-  const raw = input.split(/[\n,]+/).map(s=>s.trim()).filter(s=>s.length>=2&&s.length<=30);
-  if (!raw.length) { btn.disabled=false; btn.textContent='Submit Suggestions ✦'; showToast('Please enter valid name(s).'); return; }
-
-  const normed = raw.map(n => n.charAt(0).toUpperCase() + n.slice(1).toLowerCase());
-  let added = 0;
-  for (const name of normed) {
-    // Check for duplicate
-    const existing = names.find(n => n.name.toLowerCase()===name.toLowerCase() && n.gender===selGender);
-    if (existing) {
-      await updateDoc(doc(db,'names',existing.id), { suggCount: increment(1) });
-    } else {
-      await addDoc(collection(db,'names'), {
-        name, gender: selGender, suggCount: 1, voteCount: 0,
-        voters: [], createdAt: serverTimestamp()
-      });
-      added++;
-    }
+window.submitNames=async function(){
+  const input=(document.getElementById('names-input').value||'').trim();
+  if(!input){showToast('Please enter at least one name!');return;}
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true; btn.textContent='Submitting…';
+  const raw=input.split(/[\n,]+/).map(s=>s.trim()).filter(s=>s.length>=2&&s.length<=30);
+  if(!raw.length){btn.disabled=false;btn.textContent='Submit Suggestions ✦';showToast('Please enter valid names.');return;}
+  const normed=raw.map(n=>n.charAt(0).toUpperCase()+n.slice(1).toLowerCase());
+  for(const name of normed){
+    const ex=names.find(n=>n.name.toLowerCase()===name.toLowerCase()&&n.gender===selGender);
+    if(ex) await updateDoc(doc(db,'names',ex.id),{suggCount:increment(1)});
+    else   await addDoc(collection(db,'names'),{name,gender:selGender,suggCount:1,voteCount:0,voters:[],createdAt:serverTimestamp()});
   }
   btn.disabled=false; btn.textContent='Submit Suggestions ✦';
-  document.getElementById('names-input').value = '';
-  const count = normed.length;
-  showToast(`✦ ${count} name${count!==1?'s':''} submitted! Thank you 💛`);
+  document.getElementById('names-input').value='';
+  showToast(`✦ ${normed.length} name${normed.length!==1?'s':''} submitted! Thank you 💛`);
   launchConfetti();
 };
 
-// ── Admin ──
-window.adminLogin = function() {
-  const pw = document.getElementById('admin-pw').value;
-  if (pw === getAdminPw()) {
-    adminIn = true;
-    document.getElementById('admin-login').style.display = 'none';
-    document.getElementById('admin-dash').style.display  = 'block';
+window.adminLogin=function(){
+  const pw=document.getElementById('admin-pw').value;
+  if(pw===getAdminPw()){
+    adminIn=true;
+    document.getElementById('admin-login').style.display='none';
+    document.getElementById('admin-dash').style.display='block';
     renderAdminDash();
   } else {
-    showToast('Incorrect password. Please try again.');
-    document.getElementById('admin-pw').value = '';
-    document.getElementById('admin-pw').focus();
+    showToast('Incorrect password.');
+    document.getElementById('admin-pw').value='';
   }
 };
-window.adminLogout = function() {
-  adminIn = false;
-  document.getElementById('admin-dash').style.display  = 'none';
-  document.getElementById('admin-login').style.display = 'block';
-  document.getElementById('admin-pw').value = '';
+window.adminLogout=function(){
+  adminIn=false;
+  document.getElementById('admin-dash').style.display='none';
+  document.getElementById('admin-login').style.display='block';
+  document.getElementById('admin-pw').value='';
 };
-window.changePw = function() {
-  const val = (document.getElementById('new-pw').value||'').trim();
-  if (val.length<6) { showToast('Password must be at least 6 characters.'); return; }
-  localStorage.setItem(PW_KEY, val);
-  document.getElementById('new-pw').value = '';
+window.changePw=function(){
+  const val=(document.getElementById('new-pw').value||'').trim();
+  if(val.length<6){showToast('Min 6 characters.');return;}
+  localStorage.setItem(PW_KEY,val);
+  document.getElementById('new-pw').value='';
   showToast('Password updated!');
 };
-
-function renderAdminDash() {
-  const totalVotes = names.reduce((s,n)=>s+(n.voteCount||0),0);
-  document.getElementById('admin-stats').innerHTML = [
-    [names.length,                              'Total Names'],
-    [totalVotes,                                'Total Votes'],
-    [names.filter(n=>n.gender==='boy').length,  'Boy Names'],
-    [names.filter(n=>n.gender==='girl').length, 'Girl Names'],
+function renderAdminDash(){
+  const tv=names.reduce((s,n)=>s+(n.voteCount||0),0);
+  document.getElementById('admin-stats').innerHTML=[
+    [names.length,'Total Names'],[tv,'Total Votes'],
+    [names.filter(n=>n.gender==='boy').length,'Boy Names'],
+    [names.filter(n=>n.gender==='girl').length,'Girl Names'],
     [names.filter(n=>n.gender==='neutral').length,'Neutral'],
-  ].map(([n,l]) => `<div class="admin-stat-card"><div class="admin-stat-num" style="font-family:'Playfair Display',serif;">${n}</div><div class="admin-stat-label">${l}</div></div>`).join('');
-
-  const sorted = [...names].sort((a,b)=>(b.voteCount||0)-(a.voteCount||0));
-  document.getElementById('admin-tbody').innerHTML = sorted.length
-    ? sorted.map(n=>`
-      <tr>
-        <td><strong style="font-family:'Playfair Display',serif;font-size:16px;">${esc(n.name)}</strong></td>
-        <td><span class="gender-badge ${n.gender}" style="margin:0;">${n.gender==='boy'?'♂ Boy':n.gender==='girl'?'♀ Girl':'◇ Neutral'}</span></td>
-        <td>${n.suggCount||1}</td><td>${n.voteCount||0}</td>
-        <td style="color:var(--text-soft);font-size:13px;">${n.createdAt?.toDate ? n.createdAt.toDate().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '—'}</td>
-        <td><button class="delete-row-btn" onclick="deleteName('${n.id}')">Remove</button></td>
-      </tr>`).join('')
-    : '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-soft);">No names yet.</td></tr>';
+  ].map(([n,l])=>`<div class="admin-stat-card"><div class="admin-stat-num" style="font-family:'Playfair Display',serif;">${n}</div><div class="admin-stat-label">${l}</div></div>`).join('');
+  const sorted=[...names].sort((a,b)=>(b.voteCount||0)-(a.voteCount||0));
+  document.getElementById('admin-tbody').innerHTML=sorted.length
+    ?sorted.map(n=>`<tr>
+      <td><strong style="font-family:'Playfair Display',serif;font-size:15px;">${esc(n.name)}</strong></td>
+      <td><span class="gender-badge ${n.gender}" style="margin:0;">${n.gender==='boy'?'♂ Boy':n.gender==='girl'?'♀ Girl':'◇ Neutral'}</span></td>
+      <td>${n.suggCount||1}</td><td>${n.voteCount||0}</td>
+      <td style="color:var(--text-soft);font-size:12px;">${n.createdAt?.toDate?n.createdAt.toDate().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'—'}</td>
+      <td><button class="delete-row-btn" onclick="deleteName('${n.id}')">Remove</button></td>
+    </tr>`).join('')
+    :'<tr><td colspan="6" style="text-align:center;padding:36px;color:var(--text-soft);">No names yet.</td></tr>';
 }
-
-window.deleteName = async function(id) {
-  if (!confirm('Remove this name? Cannot be undone.')) return;
+window.deleteName=async function(id){
+  if(!confirm('Remove this name?')) return;
   await deleteDoc(doc(db,'names',id));
   showToast('Name removed.');
 };
-window.resetVotes = async function() {
-  const snap = await getDocs(collection(db,'names'));
-  const batch = snap.docs.map(d => updateDoc(d.ref, { voteCount: 0, voters: [] }));
-  await Promise.all(batch);
+window.resetVotes=async function(){
+  const snap=await getDocs(collection(db,'names'));
+  await Promise.all(snap.docs.map(d=>updateDoc(d.ref,{voteCount:0,voters:[]})));
   showToast('All votes reset.');
 };
-window.clearAll = async function() {
-  const snap = await getDocs(collection(db,'names'));
-  await Promise.all(snap.docs.map(d => deleteDoc(d.ref)));
+window.clearAll=async function(){
+  const snap=await getDocs(collection(db,'names'));
+  await Promise.all(snap.docs.map(d=>deleteDoc(d.ref)));
   showToast('All names cleared.');
 };
-window.exportCSV = function() {
-  const rows = [['Name','Gender','Suggestions','Votes','Added']];
-  [...names].sort((a,b)=>(b.voteCount||0)-(a.voteCount||0)).forEach(n =>
-    rows.push([n.name, n.gender, n.suggCount||1, n.voteCount||0,
-      n.createdAt?.toDate ? n.createdAt.toDate().toLocaleDateString() : ''])
+window.exportCSV=function(){
+  const rows=[['Name','Gender','Suggestions','Votes','Added']];
+  [...names].sort((a,b)=>(b.voteCount||0)-(a.voteCount||0)).forEach(n=>
+    rows.push([n.name,n.gender,n.suggCount||1,n.voteCount||0,
+      n.createdAt?.toDate?n.createdAt.toDate().toLocaleDateString():''])
   );
-  const csv = rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\r\n');
-  const a = Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv'})),download:'baby-names.csv'});
-  a.click();
+  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv'})),download:'baby-names.csv'}).click();
 };
 
-// ── Navigation ──
-window.showPage = function(page) {
+window.showPage=function(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn[id^="nav-"]').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
-  const nb = document.getElementById('nav-'+page); if(nb) nb.classList.add('active');
+  const nb=document.getElementById('nav-'+page); if(nb) nb.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
-  if (page==='home')   renderHome();
-  if (page==='browse') renderBrowse();
-  if (page==='admin' && adminIn) renderAdminDash();
+  if(page==='home'){renderHome();renderWordCloud();}
+  if(page==='browse') renderBrowse();
+  if(page==='admin'&&adminIn) renderAdminDash();
 };
-window.toggleMenu = function() {
+window.toggleMenu=function(){
   document.getElementById('hamburger').classList.toggle('open');
   document.getElementById('mobile-menu').classList.toggle('open');
 };
-window.closeMenu = function() {
+window.closeMenu=function(){
   document.getElementById('hamburger').classList.remove('open');
   document.getElementById('mobile-menu').classList.remove('open');
 };
 
-// ── Toast ──
 let toastT;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), 3600);
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),3600);
 }
-window.showToast = showToast;
+window.showToast=showToast;
 
-// ── Confetti ──
-function launchConfetti() {
-  const colors = ['#7A9E7E','#C4A45A','#C49BAA','#7B9DB5','#B8D4BB','#F5EDD4','#4A6B4E'];
-  for (let i=0; i<70; i++) {
-    const el = document.createElement('div'); el.className = 'confetti';
-    el.style.cssText = `left:${Math.random()*100}vw;top:-10px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${1.6+Math.random()*2.2}s;animation-delay:${Math.random()*0.9}s;transform:rotate(${Math.random()*360}deg);border-radius:${Math.random()>0.5?'50%':'2px'};`;
+function launchConfetti(){
+  const c=['#7A9E7E','#C4A45A','#C49BAA','#7B9DB5','#B8D4BB','#F5EDD4','#4A6B4E'];
+  for(let i=0;i<60;i++){
+    const el=document.createElement('div'); el.className='confetti';
+    el.style.cssText=`left:${Math.random()*100}vw;top:-10px;background:${c[Math.floor(Math.random()*c.length)]};animation-duration:${1.6+Math.random()*2.2}s;animation-delay:${Math.random()*0.9}s;transform:rotate(${Math.random()*360}deg);border-radius:${Math.random()>0.5?'50%':'2px'};`;
     document.body.appendChild(el); setTimeout(()=>el.remove(),4500);
   }
 }
 
-// ── Boot ──
-renderSkeletons('home-top', 4);
-renderSkeletons('home-recent', 4);
+renderSkeletons('home-top',4);
+renderSkeletons('home-recent',4);
 startSync();
 </script>
 </body>
