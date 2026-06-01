@@ -386,6 +386,18 @@
         <input class="search-bar" type="search" placeholder="🔍 Search names…" id="search-input" oninput="renderBrowse()" />
       </div>
       <div class="names-grid" id="browse-names"></div>
+
+      <!-- Bottom navigation -->
+      <div style="display:flex;gap:10px;margin-top:32px;padding-top:24px;border-top:1px solid var(--beige);">
+        <button onclick="showPage('home')" style="flex:1;background:var(--cream);border:1.5px solid var(--beige);border-radius:var(--radius-sm);padding:13px;font-size:13px;font-weight:500;color:var(--text-mid);display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.2s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Back to Home
+        </button>
+        <button onclick="showPage('suggest')" style="flex:1;background:var(--sage-dark);border:none;border-radius:var(--radius-sm);padding:13px;font-size:13px;font-weight:500;color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;transition:all 0.2s;">
+          ✦ Suggest a Name
+        </button>
+      </div>
+
     </div>
   </div>
 </div>
